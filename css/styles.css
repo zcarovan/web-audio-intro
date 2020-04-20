@@ -1,0 +1,38 @@
+body {
+  text-align: center;
+  font-family: Tahoma, sans-serif;
+  margin-top: 7em;
+}
+
+.btn-transport {
+  font-size: 1.5em;
+  font-weight: 750;
+  padding: 1em 2em;
+  margin: .1em .2em;
+  border: 3px solid black;
+  border-radius: 3px;
+  background: none;
+  transition: color .2s,
+  border .2s,
+  border-color .2s,
+  border-radius .2s,
+  padding .2s,
+  margin .2s;
+}
+
+.btn-transport:hover {
+  margin: 0;
+  padding: 1.1em 2.2em;
+  border-radius: 8px;
+  cursor: pointer;
+  color: darkgreen;
+  border-color: darkgreen;
+}
+
+fieldset {
+  margin: 1em;
+}
+
+label {
+  display: block;
+}

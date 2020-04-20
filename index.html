@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>TITLE GOES HERE.....</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Welcome to Web Audio!</h1>
+</header>
+
+<main>
+  <h2>Click the buttons to make (or stop) some sound:</h2>
+  <button id="playButton" class="btn-transport" type="button">play</button>
+  <button id="stopButton" class="btn-transport" type="button">stop</button>
+  <fieldset>
+    <legend>Use slider to control filter cutoff frequency</legend>
+    <label id="filterLabel" for="filterSlider">3200</label>
+    <input type="range" id="filterSlider" name="filterSlider" min="200" max="6200" step="10" />
+  </fieldset>
+</main>
+
+<script src="js/Tone.js"></script>
+
+<script>
+
+// Create a synth and connect it to the pitch shifter
+var synth = new Tone.MonoSynth().toMaster();
+// set oscillator to produce sawtooth wave (default is square)
+synth.oscillator.type = "sawtooth";
+// set filter envelope octaves to 0, which eliminates effect
+synth.filterEnvelope.octaves = 0;
+// set initial filter frequency to same value as default slider position
+synth.filterEnvelope.baseFrequency = 3200;
+// default volume is 0 dBfs (full-scale) and sounds very loud
+synth.volume.value = -30;
+
+// connect slider to filter cutoff frequency
+var filterLabel = document.querySelector('#filterLabel');
+var filterSlider = document.querySelector('#filterSlider');
+filterSlider.addEventListener('input', function() {
+  // assign slider value to filter cutoff frequency (in Hertz)
+  synth.filterEnvelope.baseFrequency = filterSlider.value;
+  // update slider label
+  filterLabel.innerHTML = filterSlider.value;
+});
+
+// The following block of code will run when the play button is clicked
+document.querySelector('#playButton').onclick = function() {
+  console.log('The play button has been clicked.');
+  // Play a middle C, which will sound until the stop button is clicked
+  synth.triggerAttack('C4');
+};
+
+// The following block of code will run when the stop button is clicked
+document.querySelector('#stopButton').onclick = function() {
+  console.log('The stop button has been clicked.');
+  // Stop the note from sounding
+  synth.triggerRelease();
+};
+
+</script>
+
+</body>
+</html>
